@@ -16,11 +16,17 @@ As a reminder:
 
 Definitive information is in the documents listed below and other IETF BCPs. For advice, please talk to WG chairs or ADs:
 
-[BCP 9](https://www.rfc-editor.org/info/bcp9) (Internet Standards Process) 
+[BCP 9](https://www.rfc-editor.org/info/bcp9) (Internet Standards Process)
+ 
 [BCP 25](https://www.rfc-editor.org/info/bcp25) (Working Group processes) 
+
 [BCP 25](https://www.rfc-editor.org/info/bcp25) (Anti-Harassment Procedures) 
+
 [BCP 54](https://www.rfc-editor.org/info/bcp54) (Code of Conduct) 
+
 [BCP 78](https://www.rfc-editor.org/info/bcp78) (Copyright) 
+
 [BCP 79](https://www.rfc-editor.org/info/bcp79) (Patents, Participation) 
+
 [Privacy Policy](https://www.ietf.org/privacy-policy/) (Privacy Policy)
 
