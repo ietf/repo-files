@@ -8,4 +8,6 @@ This repository contains files and templates for IETF working group chairs and p
 
 [contributing-samples](https://github.com/ietf/repo-files/tree/master/contributing-samples) - Samples of different CONTRIBUTING.md files currently in use. Note that several WGs are re-using highly similar versions (i.e., CORE, ACME, TLS).
 
+[note-well.html]() - The text of the IETF note well, if you should need it.
+
 
