@@ -26,19 +26,20 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Scrape TLP
+        # The sed stuff below only works with gnu-sed
         run: |
           w3m -cols 999999 -dump $TLP_URL |
             sed -E -e "1,/$TLP_START/d; /$TLP_END/,\$d" > /tmp/tlp.txt
-          sed -E -e "s|\s+| |g" \
-                 -e "s|http:|https:|g" \
-                 -e "s|e.g. |e.g., |g" \
-                 -e "s|policies of IETF|policies of the IETF|g" \
-                 -e "s|Simplified BSD|Revised BSD|g" \
-                 -e "s|(IETF Trust Legal Provisions \(TLP\) Relating to IETF Documents) \(|[\1](|g" \
-                 -e "s|(IETF Standards Process) \(|[\1](|g" \
-                 -e "s|(BCP [0-9]+) \(|[\1](|g" \
-                 -e "s|www.ietf.org/|www.rfc-editor.org/info/bcp9|g" \
-                 -e "s|(Internet Engineering Task Force \(IETF\))|[\1](\https://www.ietf.org/)|g" /tmp/tlp.txt |
+          sed -E -e "s|\s+| |" \
+                 -e "s|http:|https:|" \
+                 -e "s|e.g. |e.g., |" \
+                 -e "s|policies of IETF|policies of the IETF|" \
+                 -e "s|Simplified BSD|Revised BSD|" \
+                 -e "s|(IETF Trust Legal Provisions \(TLP\) Relating to IETF Documents) \(|[\1](|" \
+                 -e "s|(IETF Standards Process) \(|[\1](|" \
+                 -e "s|(BCP [0-9]+) \(|[\1](|" \
+                 -e "s|www.ietf.org/|www.rfc-editor.org/info/bcp9|" \
+                 -e "s|(Internet Engineering Task Force \(IETF\))|[\1](\https://www.ietf.org/)|" /tmp/tlp.txt |
             sed -E -e "1s/^/# License\n/" |
             pandoc -f markdown -t gfm+smart > LICENSE.md
           cat LICENSE.md
@@ -47,12 +48,12 @@ jobs:
         run: |
           w3m -cols 999999 -dump $NOTEWELL_URL |
             sed -E -e "1,/$NOTEWELL_START/d; /$NOTEWELL_END/,\$d" > /tmp/notewell.txt
-          sed -E -e "s|\s+| |g" \
-                 -e "s|IETF|[Internet Engineering Task Force (IETF)](https://www.ietf.org/)|1" \
-                 -e "s|(ombudsteam) \(|[\1](|g" \
-                 -e "s|BCP ([0-9]+)|[BCP \1](https://www.rfc-editor.org/info/bcp\1)|g" \
-                 -e "s|https://www.ietf.org/privacy-policy/.*|[Privacy Policy](https://www.ietf.org/privacy-policy/)|g" \
-                 -e "s|\s+•|*|g" /tmp/notewell.txt |
+          sed -E -e "s|\s+| |" \
+                 -e "0,|IETF|{s|IETF|[Internet Engineering Task Force (IETF)](https://www.ietf.org/)|}" \
+                 -e "s|(ombudsteam) \(|[\1](|" \
+                 -e "s|BCP ([0-9]+)|[BCP \1](https://www.rfc-editor.org/info/bcp\1)|" \
+                 -e "s|https://www.ietf.org/privacy-policy/.*|[Privacy Policy](https://www.ietf.org/privacy-policy/)|" \
+                 -e "s|\s+•|*|" /tmp/notewell.txt |
             sed -E -e "1s/^/# Note Well\n/" |
             pandoc -f markdown -t gfm+smart > NOTE-WELL.md
           cat NOTE-WELL.md
