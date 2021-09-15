@@ -21,15 +21,15 @@ jobs:
         run: sudo apt-get -y install --no-install-recommends w3m
       - name: Scrape TLP
         run: |
-          w3m -cols 999999 -dump $TLP_URL > tlp.txt
-          sed -E -e "1,/$TLP_START/d; /$TLP_END/,\$d" \
-                 -e "s/http:/https:/g" \
+          w3m -cols 999999 -dump $TLP_URL > tlp.txt |
+            sed -E -e "1,/$TLP_START/d; /$TLP_END/,\$d" > tlp.txt
+          sed -E -e "s/http:/https:/g" \
                  -e "s/e.g. /e.g., /g" \
                  -e "s/policies of IETF/policies of the IETF/g" \
                  -e "s/Simplified BSD/Revised BSD/g" \
                  -e "s/(IETF Trust Legal Provisions \(TLP\) Relating to IETF Documents) \(/[\1]\(/g" \
                  -e "s/(IETF Standards Process) \(/[\1]\(/g" \
-                 -e "s/(BCP [0-9]+) \(/[\1]\(/g" |
+                 -e "s/(BCP [0-9]+) \(/[\1]\(/g" tlp.txt |
             sed -E -e "1s/^/# License\n/" |
             fmt -w 72 > tlp.md
           cat tlp.md
