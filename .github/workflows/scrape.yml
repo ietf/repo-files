@@ -30,12 +30,12 @@ jobs:
                  -e "s|Simplified BSD|Revised BSD|g" \
                  -e "s|(IETF Trust Legal Provisions \(TLP\) Relating to IETF Documents) \(|[\1]\(|g" \
                  -e "s|(IETF Standards Process) \(|[\1]\(|g" \
-                 -e "s|www.ietf.org/|https://www.rfc-editor.org/info/bcp9|g" \
+                 -e "s|www.ietf.org/|www.rfc-editor.org/info/bcp9|g" \
                  -e "s|(Internet Engineering Task Force \(IETF\))|[\1]\(\https://www.ietf.org/\)|g" tlp.txt |
             sed -E -e "1s/^/# License\n/" |
             fmt -w 72 > tlp.md
           cat tlp.md
-          diff -u tlp.txt tlp.md
+          wdiff tlp.txt tlp.md
 
       # - name: Send mail
       #   uses: dawidd6/action-send-mail@v3
