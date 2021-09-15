@@ -1,6 +1,8 @@
 name: Scrape
 
 on:
+  push:
+  pr:
   schedule:
     - cron: "0 4 * * *"
 
