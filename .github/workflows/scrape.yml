@@ -11,6 +11,9 @@ env:
   TLP_URL: https://trustee.ietf.org/assets/licenses/license-for-open-source-repositories/
   TLP_START: "^Official boilerplate text:"
   TLP_END: "^Search for:"
+  NOTEWELL_URL: https://www.ietf.org/about/note-well/
+  NOTEWELL_START: "^A reminder of IETF policies."
+  NOTEWELL_END: "^About"
 
 jobs:
   scrape:
@@ -24,7 +27,7 @@ jobs:
       - name: Scrape TLP
         run: |
           w3m -cols 999999 -dump $TLP_URL |
-            sed -E -e "1,/$TLP_START/d; /$TLP_END/,\$d" > tlp.txt
+            sed -E -e "1,/$TLP_START/d; /$TLP_END/,\$d" > /tmp/tlp.txt
           sed -E -e "s|\s+| |g" \
                  -e "s|http:|https:|g" \
                  -e "s|e.g. |e.g., |g" \
@@ -33,11 +36,19 @@ jobs:
                  -e "s|(IETF Trust Legal Provisions \(TLP\) Relating to IETF Documents) \(|[\1]\(|g" \
                  -e "s|(IETF Standards Process) \(|[\1]\(|g" \
                  -e "s|www.ietf.org/|www.rfc-editor.org/info/bcp9|g" \
-                 -e "s|(Internet Engineering Task Force \(IETF\))|[\1]\(\https://www.ietf.org/\)|g" tlp.txt |
+                 -e "s|(Internet Engineering Task Force \(IETF\))|[\1]\(\https://www.ietf.org/\)|g" /tmp/tlp.txt |
             sed -E -e "1s/^/# License\n/" |
-            fmt -w 72 > tlp.md
-          cat tlp.md
-          diff -u LICENSE.md tlp.md
+            fmt -w 72 > LICENSE.md
+            cat LICENSE.md
+      - name: Scrape Note Well
+        run: |
+          w3m -cols 999999 -dump $NOTEWELL_URL |
+            sed -E -e "1,/$NOTEWELL_START/d; /$NOTEWELL_END/,\$d" > /tmp/notewell.txt
+          sed -E -e "s|\s+| |g" \
+                 -e "s|||g" /tmp/notewell.txt |
+            sed -E -e "1s/^/# Note Well\n/" |
+            fmt -w 72 > NOTE-WELL.md
+            cat NOTE-WELL.md
 
       # - name: Send mail
       #   uses: dawidd6/action-send-mail@v3
