@@ -21,7 +21,7 @@ jobs:
 
     steps:
       - name: Install dependencies
-        run: sudo apt-get -y install --no-install-recommends w3m npm
+        run: sudo apt-get -y install --no-install-recommends w3m pandoc
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Scrape TLP
@@ -39,7 +39,7 @@ jobs:
                  -e "s|(Internet Engineering Task Force \(IETF\))|[\1]\(\https://www.ietf.org/\)|g" /tmp/tlp.txt |
             sed -E -e "1s/^/# License\n/" > LICENSE.md
             cat LICENSE.md
-            markdownlint --fix LICENSE.md
+            pandoc -f markdown -t markdown_github LICENSE.md
             cat LICENSE.md
       - name: Scrape Note Well
         run: |
@@ -50,7 +50,7 @@ jobs:
                  -e "s|\s+•|*|g" /tmp/notewell.txt |
             sed -E -e "1s/^/# Note Well\n/" |
             cat NOTE-WELL.md
-            markdownlint --fix NOTE-WELL.md
+            pandoc -f markdown -t markdown_github NOTE-WELL.md
             cat NOTE-WELL.md
       - name: Check diff
         run: git diff
