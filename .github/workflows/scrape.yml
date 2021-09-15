@@ -44,11 +44,14 @@ jobs:
         run: |
           w3m -cols 999999 -dump $NOTEWELL_URL |
             sed -E -e "1,/$NOTEWELL_START/d; /$NOTEWELL_END/,\$d" > /tmp/notewell.txt
+          cat /tmp/notewell.txt
           sed -E -e "s|\s+| |g" \
-                 -e "s|||g" /tmp/notewell.txt |
+                 -e "s|\s+•|*|g" /tmp/notewell.txt |
             sed -E -e "1s/^/# Note Well\n/" |
             fmt -w 72 > NOTE-WELL.md
             cat NOTE-WELL.md
+      - name: Check diff
+        run: git diff
 
       # - name: Send mail
       #   uses: dawidd6/action-send-mail@v3
