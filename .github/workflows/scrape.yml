@@ -21,8 +21,9 @@ jobs:
         run: sudo apt-get -y install --no-install-recommends w3m
       - name: Scrape TLP
         run: |
-          w3m -dump $TLP_URL > tlp.txt
-          sed -i "1,/$TLP_START/d; /$TLP_END/,\$d" tlp.txt
+          w3m -cols 999999 -dump $TLP_URL > tlp.txt
+          sed -i "1,/$TLP_START/d; /$TLP_END/,\$d" > tlp.txt
+          fmt -n -s -w 72 tlp.txt
           cat tlp.txt
       # - name: Send mail
       #   uses: dawidd6/action-send-mail@v3
