@@ -21,7 +21,7 @@ jobs:
 
     steps:
       - name: Install dependencies
-        run: sudo apt-get -y install --no-install-recommends w3m
+        run: sudo apt-get -y install --no-install-recommends w3m npm
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Scrape TLP
@@ -37,8 +37,9 @@ jobs:
                  -e "s|(IETF Standards Process) \(|[\1]\(|g" \
                  -e "s|www.ietf.org/|www.rfc-editor.org/info/bcp9|g" \
                  -e "s|(Internet Engineering Task Force \(IETF\))|[\1]\(\https://www.ietf.org/\)|g" /tmp/tlp.txt |
-            sed -E -e "1s/^/# License\n/" |
-            fmt -w 72 > LICENSE.md
+            sed -E -e "1s/^/# License\n/" > LICENSE.md
+            cat LICENSE.md
+            markdownlint --fix LICENSE.md
             cat LICENSE.md
       - name: Scrape Note Well
         run: |
@@ -48,7 +49,8 @@ jobs:
           sed -E -e "s|\s+| |g" \
                  -e "s|\s+•|*|g" /tmp/notewell.txt |
             sed -E -e "1s/^/# Note Well\n/" |
-            fmt -w 72 > NOTE-WELL.md
+            cat NOTE-WELL.md
+            markdownlint --fix NOTE-WELL.md
             cat NOTE-WELL.md
       - name: Check diff
         run: git diff
