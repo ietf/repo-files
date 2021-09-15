@@ -21,7 +21,7 @@ jobs:
         run: sudo apt-get -y install --no-install-recommends w3m
       - name: Scrape TLP
         run: |
-          w3m -cols 999999 -dump $TLP_URL > tlp.txt |
+          w3m -cols 999999 -dump $TLP_URL |
             sed -E -e "1,/$TLP_START/d; /$TLP_END/,\$d" > tlp.txt
           sed -E -e "s/http:/https:/g" \
                  -e "s/e.g. /e.g., /g" \
