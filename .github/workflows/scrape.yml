@@ -40,23 +40,22 @@ jobs:
                  -e "s|www.ietf.org/|www.rfc-editor.org/info/bcp9|g" \
                  -e "s|(Internet Engineering Task Force \(IETF\))|[\1](\https://www.ietf.org/)|g" /tmp/tlp.txt |
             sed -E -e "1s/^/# License\n/" |
-            pandoc -f markdown -t gfm > LICENSE.md
+              pandoc -f markdown -t gfm > LICENSE.md
             cat LICENSE.md
 
       - name: Scrape Note Well
         run: |
           w3m -cols 999999 -dump $NOTEWELL_URL |
             sed -E -e "1,/$NOTEWELL_START/d; /$NOTEWELL_END/,\$d" > /tmp/notewell.txt
-          cat /tmp/notewell.txt
           sed -E -e "s|\s+| |g" \
                  -e "s|IETF|[Internet Engineering Task Force (IETF)](https://www.ietf.org/)|" \
                  -e "s|(ombudsteam) \(|[\1](|g" \
                  -e "s|BCP ([0-9]+)|[BCP \1](https://www.rfc-editor.org/info/bcp\1)|g" \
                  -e "s|https://www.ietf.org/privacy-policy/.*|[Privacy Policy](https://www.ietf.org/privacy-policy/)|g" \
                  -e "s|\s+•|*|g" /tmp/notewell.txt |
-            sed -E -e "1s/^/# Note Well\n/" > NOTE-WELL.md
+            sed -E -e "1s/^/# Note Well\n/" |
+              pandoc -f markdown -t gfm NOTE-WELL.md
             cat NOTE-WELL.md
-            pandoc -f markdown -t gfm NOTE-WELL.md
 
       - name: Check diff
         run: git diff
@@ -64,9 +63,7 @@ jobs:
       - name: Create PR
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.PAT }}
           commit-message: Update Markdown from canonical sources
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           branch: update-from-canonical-sources
           delete-branch: true
           title: 'Update Markdown from canonical sources'
