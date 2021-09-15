@@ -1,0 +1,37 @@
+name: "Lint Markdown"
+
+on:
+  push:
+    paths-ignore:
+    - .*
+    - LICENSE.md
+  pull_request:
+    paths-ignore:
+    - .*
+    - LICENSE.md
+
+jobs:
+  lint-changelog:
+    name: Lint Markdown
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+    - name: Create markdownlint.json
+      run: |
+        cat <<EOF > /markdownlint.json
+          {
+            "default": true,
+            "MD029": {"style": "ordered" },
+            "MD031": false,
+            "MD033": false,
+            "MD034": false,
+            "MD040": false,
+            "MD041": false
+          }
+        EOF
+    - name: Run markdownlint
+      uses: docker://avtodev/markdown-lint:master
+      with:
+        config: 'markdownlint.json'
+        args: '*.md'
