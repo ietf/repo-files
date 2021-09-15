@@ -22,8 +22,12 @@ jobs:
       - name: Scrape TLP
         run: |
           w3m -cols 999999 -dump $TLP_URL |
-            sed "1,/$TLP_START/d; /$TLP_END/,\$d" |
-            sed "1s;^;# License\n;" |
+            sed -e "1,/$TLP_START/d; /$TLP_END/,\$d"
+                -e "1s/^/# License\n/"
+                -e "s/http:/https:/g"
+                -e "s/e.g. /e.g., "g"
+                -e "s/Simplified BSD/Revised BSD/g" |
+                -e "s/(BCP .*) /(/[\1]\(/g"
             fmt -w 72 > tlp.txt
           cat tlp.txt
       # - name: Send mail
