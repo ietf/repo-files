@@ -10,29 +10,24 @@ carefully.
 
 As a reminder:
 
-  - By participating in the [Internet Engineering Task Force
-    (IETF)](https://www.ietf.org/), you agree to follow IETF processes
-    and policies.
-  - If you are aware that any [Internet Engineering Task Force
-    (IETF)](https://www.ietf.org/) contribution is covered by patents or
+  - By participating in the IETF, you agree to follow IETF processes and
+    policies.
+  - If you are aware that any IETF contribution is covered by patents or
     patent applications that are owned or controlled by you or your
     sponsor, you must disclose that fact, or not participate in the
     discussion.
-  - As a participant in or attendee to any [Internet Engineering Task
-    Force (IETF)](https://www.ietf.org/) activity you acknowledge that
-    written, audio, video, and photographic records of meetings may be
-    made public.
-  - Personal information that you provide to [Internet Engineering Task
-    Force (IETF)](https://www.ietf.org/) will be handled in accordance
-    with the IETF Privacy Statement.
+  - As a participant in or attendee to any IETF activity you acknowledge
+    that written, audio, video, and photographic records of meetings may
+    be made public.
+  - Personal information that you provide to IETF will be handled in
+    accordance with the IETF Privacy Statement.
   - As a participant or attendee, you agree to work respectfully with
     other participants; please contact the
     [ombudsteam](https://www.ietf.org/contact/ombudsteam/) if you have
     questions or concerns about this.
 
-Definitive information is in the documents listed below and other
-[Internet Engineering Task Force (IETF)](https://www.ietf.org/) BCPs.
-For advice, please talk to WG chairs or ADs:
+Definitive information is in the documents listed below and other IETF
+BCPs. For advice, please talk to WG chairs or ADs:
 
   - [BCP 9](https://www.rfc-editor.org/info/bcp9) (Internet Standards
     Process)
