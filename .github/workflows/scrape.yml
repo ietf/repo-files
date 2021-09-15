@@ -1,0 +1,29 @@
+name: Scrape
+
+on:
+  schedule:
+    - cron: "0 4 * * *"
+
+jobs:
+  scrape-latest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Scrape TLP
+        run: |
+          w3m -dump https://trustee.ietf.org/assets/licenses/license-for-open-source-repositories/ > tlp.txt
+          sed -i -n "/Official boilerplate text:/, /Search for:/ p" tlp.txt
+          cat tlp.txt
+      # - name: Send mail
+      #   uses: dawidd6/action-send-mail@v3
+      #   with:
+      #     server_address: smtp.gmail.com
+      #     server_port: 465
+      #     username: ${{secrets.MAIL_USERNAME}}
+      #     password: ${{secrets.MAIL_PASSWORD}}
+      #     subject: Latest PPRA tenders for ${{env.DATE}}
+      #     to: hi@yasoob.me
+      #     from: Automated Email
+      #     ignore_cert: true
+      #     secure: true
+      #     html_body: file://ppra.html
