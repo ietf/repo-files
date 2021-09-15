@@ -67,6 +67,7 @@ jobs:
           commit-message: Update Markdown from canonical sources
           branch: update-from-canonical-sources
           delete-branch: true
+          base: main
           title: 'Update Markdown from canonical sources'
           body: |
             Changes were detected to the canonical sources of some of the files in this repository.
