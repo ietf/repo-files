@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Install dependencies
         run: sudo apt-get -y install --no-install-recommends w3m
+      - name: Checkout repository
+        uses: actions/checkout@v2
       - name: Scrape TLP
         run: |
           w3m -cols 999999 -dump $TLP_URL |
@@ -35,7 +37,7 @@ jobs:
             sed -E -e "1s/^/# License\n/" |
             fmt -w 72 > tlp.md
           cat tlp.md
-          wdiff tlp.txt tlp.md
+          diff -u LICENSE.md tlp.md
 
       # - name: Send mail
       #   uses: dawidd6/action-send-mail@v3
