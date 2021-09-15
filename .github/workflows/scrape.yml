@@ -24,7 +24,7 @@ jobs:
           w3m -cols 999999 -dump $TLP_URL > tlp.txt
           sed -i "1,/$TLP_START/d; /$TLP_END/,\$d" tlp.txt
           sed -i '1s;^;# License\n\n;' tlp.txt
-          fmt -n -s -w 72 tlp.txt
+          fmt -w 72 tlp.txt
           cat tlp.txt
       # - name: Send mail
       #   uses: dawidd6/action-send-mail@v3
