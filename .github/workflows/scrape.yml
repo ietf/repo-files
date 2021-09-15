@@ -1,7 +1,6 @@
 name: Scrape canonical sources
 
 on:
-  push:
   schedule:
     - cron: "0 4 * * *"
 
