@@ -48,7 +48,7 @@ jobs:
           w3m -cols 999999 -dump $NOTEWELL_URL |
             sed -E -e "1,/$NOTEWELL_START/d; /$NOTEWELL_END/,\$d" > /tmp/notewell.txt
           sed -E -e "s|\s+| |g" \
-                 -e "s|IETF|[Internet Engineering Task Force (IETF)](https://www.ietf.org/)|" \
+                 -e "s|IETF|[Internet Engineering Task Force (IETF)](https://www.ietf.org/)|1" \
                  -e "s|(ombudsteam) \(|[\1](|g" \
                  -e "s|BCP ([0-9]+)|[BCP \1](https://www.rfc-editor.org/info/bcp\1)|g" \
                  -e "s|https://www.ietf.org/privacy-policy/.*|[Privacy Policy](https://www.ietf.org/privacy-policy/)|g" \
