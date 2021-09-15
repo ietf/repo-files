@@ -13,7 +13,7 @@ env:
   TLP_END: "^Search for:"
 
 jobs:
-  scrape-latest:
+  scrape:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,13 +23,15 @@ jobs:
         run: |
           w3m -cols 999999 -dump $TLP_URL |
             sed -E -e "1,/$TLP_START/d; /$TLP_END/,\$d" > tlp.txt
-          sed -E -e "s/http:/https:/g" \
-                 -e "s/e.g. /e.g., /g" \
-                 -e "s/policies of IETF/policies of the IETF/g" \
-                 -e "s/Simplified BSD/Revised BSD/g" \
-                 -e "s/(IETF Trust Legal Provisions \(TLP\) Relating to IETF Documents) \(/[\1]\(/g" \
-                 -e "s/(IETF Standards Process) \(/[\1]\(/g" \
-                 -e "s/(BCP [0-9]+) \(/[\1]\(/g" tlp.txt |
+          sed -E -e "s|\s+| |g" \
+                 -e "s|http:|https:|g" \
+                 -e "s|e.g. |e.g., |g" \
+                 -e "s|policies of IETF|policies of the IETF|g" \
+                 -e "s|Simplified BSD|Revised BSD|g" \
+                 -e "s|(IETF Trust Legal Provisions \(TLP\) Relating to IETF Documents) \(|[\1]\(|g" \
+                 -e "s|(IETF Standards Process) \(|[\1]\(|g" \
+                 -e "s|www.ietf.org/|https://www.rfc-editor.org/info/bcp9|g" \
+                 -e "s|(Internet Engineering Task Force \(IETF\))|[\1]\(\https://www.ietf.org/\)|g" tlp.txt |
             sed -E -e "1s/^/# License\n/" |
             fmt -w 72 > tlp.md
           cat tlp.md
