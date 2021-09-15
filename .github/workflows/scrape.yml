@@ -22,7 +22,7 @@ jobs:
       - name: Scrape TLP
         run: |
           w3m -cols 999999 -dump $TLP_URL |
-            sed _E -e "1,/$TLP_START/d; /$TLP_END/,\$d" \
+            sed -E -e "1,/$TLP_START/d; /$TLP_END/,\$d" \
                    -e "1s/^/# License\n/" \
                    -e "s/http:/https:/g" \
                    -e "s/e.g. /e.g., /g" \
