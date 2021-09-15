@@ -22,13 +22,13 @@ jobs:
       - name: Scrape TLP
         run: |
           w3m -cols 999999 -dump $TLP_URL |
-            sed -e "1,/$TLP_START/d; /$TLP_END/,\$d"
-                -e "1s/^/# License\n/"
-                -e "s/http:/https:/g"
-                -e "s/e.g. /e.g., /g"
-                -e "s/Simplified BSD/Revised BSD/g"
-                -e "s/(IETF Trust Legal Provisions \(TLP\) Relating to IETF Documents) \(/[\1]\(/g"
-                -e "s/(IETF Standards Process) \(/[\1]\(/g"
+            sed -e "1,/$TLP_START/d; /$TLP_END/,\$d" \
+                -e "1s/^/# License\n/" \
+                -e "s/http:/https:/g" \
+                -e "s/e.g. /e.g., /g" \
+                -e "s/Simplified BSD/Revised BSD/g" \
+                -e "s/(IETF Trust Legal .* to IETF Documents) \(/[\1]\(/g" \
+                -e "s/(IETF Standards Process) \(/[\1]\(/g" \
                 -e "s/(BCP .*) \(/[\1]\(/g" |
             fmt -w 72 > tlp.txt
           cat tlp.txt
