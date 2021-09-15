@@ -3,8 +3,8 @@
 This is a reminder of [Internet Engineering Task Force
 (IETF)](https://www.ietf.org/) policies in effect on various topics such
 as patents or code of conduct. It is only meant to point you in the
-right direction. Exceptions may apply. The IETF’s patent policy and the
-definition of an IETF “contribution” and “participation” are set forth
+right direction. Exceptions may apply. The IETF's patent policy and the
+definition of an IETF "contribution" and "participation" are set forth
 in [BCP 79](https://www.rfc-editor.org/info/bcp79); please read it
 carefully.
 
