@@ -37,9 +37,8 @@ jobs:
                  -e "s|(IETF Standards Process) \(|[\1]\(|g" \
                  -e "s|www.ietf.org/|www.rfc-editor.org/info/bcp9|g" \
                  -e "s|(Internet Engineering Task Force \(IETF\))|[\1]\(\https://www.ietf.org/\)|g" /tmp/tlp.txt |
-            sed -E -e "1s/^/# License\n/" > LICENSE.md
-            cat LICENSE.md
-            pandoc -f markdown -t markdown_github LICENSE.md
+            sed -E -e "1s/^/# License\n/" |
+            pandoc -f markdown -t gfm > LICENSE.md
             cat LICENSE.md
       - name: Scrape Note Well
         run: |
@@ -48,10 +47,9 @@ jobs:
           cat /tmp/notewell.txt
           sed -E -e "s|\s+| |g" \
                  -e "s|\s+•|*|g" /tmp/notewell.txt |
-            sed -E -e "1s/^/# Note Well\n/" |
+            sed -E -e "1s/^/# Note Well\n/" > NOTE-WELL.md
             cat NOTE-WELL.md
-            pandoc -f markdown -t markdown_github NOTE-WELL.md
-            cat NOTE-WELL.md
+            pandoc -f markdown -t gfm NOTE-WELL.md
       - name: Check diff
         run: git diff
 
