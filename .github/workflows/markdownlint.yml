@@ -35,5 +35,5 @@ jobs:
     - name: Run markdownlint
       uses: docker://avtodev/markdown-lint:master
       with:
-        config: '$GITHUB_WORKSPACE/.markdownlint.json'
+        config: $GITHUB_WORKSPACE/.markdownlint.json
         args: '**.md'
