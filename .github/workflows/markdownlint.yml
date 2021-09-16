@@ -16,9 +16,9 @@ jobs:
     - name: Locate or create markdownlint config
       run: |
         ls -la $GITHUB_WORKSPACE
-        if [ ! -f $GITHUB_WORKSPACE/.markdownlint.json ]; then
+        if [ ! -f .markdownlint.json ]; then
           echo "Using template markdownlint config"
-          cat << EOF > $GITHUB_WORKSPACE/.markdownlint.json
+          cat << EOF > .markdownlint.json
             {
               "default": true,
               "MD029": {"style": "ordered" },
@@ -31,9 +31,10 @@ jobs:
         EOF
         fi
         ls -la $GITHUB_WORKSPACE
+        ls -la
 
     - name: Run markdownlint
       uses: docker://avtodev/markdown-lint:master
       with:
-        config: $GITHUB_WORKSPACE/.markdownlint.json
+        config: '.markdownlint.json'
         args: '**.md'
