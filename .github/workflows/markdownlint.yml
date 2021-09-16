@@ -17,7 +17,7 @@ jobs:
       run: |
         if [ ! -f .markdownlint.json ]; then
           echo "Using template markdownlint config"
-          cat <<-EOF > .markdownlint.json
+          cat << EOF > .markdownlint.json
             {
               "default": true,
               "MD029": {"style": "ordered" },
@@ -27,7 +27,7 @@ jobs:
               "MD040": false,
               "MD041": false
             }
-          EOF
+        EOF
         fi
 
     - name: Run markdownlint
