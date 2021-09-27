@@ -11,7 +11,7 @@ env:
   TLP_END: "^Search for:"
   NOTEWELL_URL: https://www.ietf.org/about/note-well/
   NOTEWELL_START: "^A reminder of IETF policies."
-  NOTEWELL_END: "^About"
+  NOTEWELL_END: "^--------"
 
 jobs:
   scrape:
@@ -26,7 +26,7 @@ jobs:
 
       - name: Scrape TLP
         run: |
-          w3m -cols 999999 -dump $TLP_URL |
+          w3m -no-graph -cols 999999 -dump $TLP_URL |
             sed -E -e "1,/$TLP_START/d; /$TLP_END/,\$d" > /tmp/tlp.txt
           sed -E -e "s|\s+| |g" \
                  -e "s|http:|https:|g" \
@@ -44,7 +44,7 @@ jobs:
 
       - name: Scrape Note Well
         run: |
-          w3m -cols 999999 -dump $NOTEWELL_URL |
+          w3m -no-graph -cols 999999 -dump $NOTEWELL_URL |
             sed -E -e "1,/$NOTEWELL_START/d; /$NOTEWELL_END/,\$d" > /tmp/notewell.txt
           sed -E -e "s|\s+| |g" \
                  -e "s|IETF policies|[Internet Engineering Task Force (IETF)](https://www.ietf.org/) policies|" \
