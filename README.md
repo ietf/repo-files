@@ -38,6 +38,6 @@ IETF work.
     activity reports, issue summaries and other information about GitHub
     activity to mailing lists. This is typically appreciated by IETF
     participants that do not actively follow GitHub discussions and activities
-    very closely. See [IETF Repository Data
-    Service](https://github.com/ietf-github-services/repo-data) on how to get
+    very closely. See [Github Services for the
+    IETF](https://github.com/ietf-github-services/) on how to get
     started.
